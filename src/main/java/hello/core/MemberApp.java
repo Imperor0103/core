@@ -9,7 +9,11 @@ public class MemberApp
 {
     public static void main(String[] args)
     {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();    // AppConfig에서 가져온다
+
+        // 직접할당: DIP에 위배
+        // MemberService memberService = new MemberServiceImpl();
 
         // ctrl + alt + v
         Member member = new Member(1L, "memberA", Grade.VIP);

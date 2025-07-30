@@ -14,8 +14,13 @@ public class OrderApp
 {
     public static void main(String[] args)
     {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+        
+        // DIP 위배
+        // MemberService memberService = new MemberServiceImpl();
+        // OrderService orderService = new OrderServiceImpl();
 
         long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);

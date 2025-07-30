@@ -2,7 +2,15 @@ package hello.core.member;
 
 public class MemberServiceImpl implements MemberService
 {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    // MemoryRepository에 대한 코드는 없다
+    // MemberRepository 인터페이스만 존재한다
+    private final MemberRepository memberRepository;    // 추상화에만 의존(DIP 원칙)
+
+    // 생성자를 통해 memberRepository에 뭐가 들어갈지 선택
+    public MemberServiceImpl(MemberRepository memberRepository)
+    {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member)
