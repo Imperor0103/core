@@ -15,6 +15,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+// ctrl + n: 상속받은 클래스 확인 가능
 public class ApplicationContextExtendsFindTest
 {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
