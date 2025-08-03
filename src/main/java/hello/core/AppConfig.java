@@ -20,6 +20,8 @@ import org.springframework.context.annotation.Configuration;    // spring으로 
 @Configuration
 public class AppConfig
 {
+    // factory 메서드를 통해 bean을 등록하는 방법
+    
     // spring으로 변환
     @Bean   
     public MemberService memberService()
