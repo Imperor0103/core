@@ -23,7 +23,7 @@ public class ConfigurationSingletonTest
 
         MemberRepository memberRepository1 = memberService.getMemberRepository();
         MemberRepository memberRepository2 = orderService.getMemberRepository();
-        
+
         // 출력결과 셋 다 결과는 같다
         // hello.core.member.MemoryMemberRepository가 3번 호출된다
         System.out.println("memberService -> memberRepository1: " + memberRepository1);
@@ -31,7 +31,18 @@ public class ConfigurationSingletonTest
         System.out.println("memberRepository3: " + memberRepository);
         // new를 3번 했는데 어째서 결과가 같은가?
 
+
         assertThat(memberService.getMemberRepository()).isSameAs(memberRepository);
         assertThat(orderService.getMemberRepository()).isSameAs(memberRepository);
+    }
+
+    @Test
+    void configurationDeep()
+    {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+        System.out.println("bean = " + bean.getClass());
+
     }
 }

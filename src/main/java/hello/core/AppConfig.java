@@ -40,6 +40,12 @@ public class AppConfig
     // 1번씩만 호출되는 이유?
     // spring은 어떤 방법을 써서라도 singleton을 보장해주므로
     // 새로 생성은 처음 1번만 되면서 그때만 메서드를 호출하기 때문에 메서드 내의 메세지는 1번만 호출된다
+    // 그걸 관리하는게 spring의 @Configuration이다
+    // 위에서 @Configuration을 comment 처리하고
+    // ConfigurationSingletonTest.configurationTest을 우클릭 -> Run 하면
+    // 오류는 생기지만, memberService, orderService, memberRepository 모두 다른 것들이 등록되는 것을 확인할 수 있다
+    // spring bean이 아니라 직접 new로 만든 것이기 때문이다
+
 
     // spring으로 변환
     @Bean   
