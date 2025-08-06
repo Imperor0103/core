@@ -19,7 +19,8 @@ public class MemberServiceImpl implements MemberService
     }
 
     @Override
-    public Member findMember(Long memberId) {
-        return memberRepository.findById(memberId);
-    }
+    public Member findMember(Long memberId) { return memberRepository.findById(memberId); }
+
+    // 테스트 용도: memberRepository가 생성될 때 spring이 singleton을 어떻게 관리하는지 확인하기 위해
+    public MemberRepository getMemberRepository() { return memberRepository; }
 }

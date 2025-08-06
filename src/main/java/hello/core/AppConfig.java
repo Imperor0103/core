@@ -20,26 +20,53 @@ import org.springframework.context.annotation.Configuration;    // spring으로 
 @Configuration
 public class AppConfig
 {
+    // @Bean memberService호출 -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    // ctrl + N: 클래스 이동
+
     // factory 메서드를 통해 bean을 등록하는 방법
-    
+
+    // 예상 출력 메세지(순서는 보장하지 않는다)
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+
+    // 실제 출력 메세지
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // 1번씩만 호출되는 이유?
+    // spring은 어떤 방법을 써서라도 singleton을 보장해주므로
+    // 새로 생성은 처음 1번만 되면서 그때만 메서드를 호출하기 때문에 메서드 내의 메세지는 1번만 호출된다
+
     // spring으로 변환
     @Bean   
     public MemberService memberService()
     {
         // ctrl + alt + m: 리팩터링
 
+        // soutm: sout + 호출한 함수 이름까지 자동완성
+        System.out.println("AppConfig.memberService");
+
         // 생성자 주입: 생성자를 통해 memberRepository에 뭐가 들어갈지 선택
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
-    public MemberRepository memberRepository() {
+    public MemberRepository memberRepository()
+    {
+        System.out.println("AppConfig.memberRepository");
+
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService()
     {
+        System.out.println("AppConfig.orderService");
+
         // 마찬가지로 생성자 주입
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
