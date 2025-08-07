@@ -4,8 +4,11 @@ import hello.core.discount.DiscountPolicy;
 
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+// 의존관계 자동 주입을 위해 @Component
+@Component
 public class OrderServiceImpl implements OrderService
 {
     // DIP 원칙 적용
@@ -18,6 +21,8 @@ public class OrderServiceImpl implements OrderService
     private final DiscountPolicy discountPolicy;    // 인터페이스에만 의존한다(DIP 원칙)
 
     // 생성자를 통해 memberRepository와 discountPolicy에 뭐가 들어갈지 선택
+    // 의존관계 자동 주입을 위해 @Autowired
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy)
     {
         this.memberRepository = memberRepository;
