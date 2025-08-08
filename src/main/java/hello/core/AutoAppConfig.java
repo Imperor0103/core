@@ -16,8 +16,19 @@ import org.springframework.context.annotation.FilterType;
 // l shift 2번:  해당 키워드를 가진 모든 파일 검색
 // @Configuration 검색하면 ApplicationContextExtendsFindText 파일을 찾을 수 있다
 
+// basePackages 탐색할 패키지의 시작 위치를 지정해서 이 패키지를 포함하여 하위 패키지를 모두 탐색
+// basePackageClasses 지정한 클래스가 있는 패키지를 탐색의 시작 위치로 지정
+// 예를 들어 basePacakages를 hello.core.member
+// basePackageClasses를 AutoAppConfig.class라고 하면
+// AutoAppConfig.class는 hello.core 패키지에 있는 클래스이므로 hello.core 패키지를 시작 위치로 지정
+// 만약 basePackageClasses를 지정하지 않으면 @ComponentScan을 붙인 클래스가 있는 패키지를 시작위치로 지정
+// basePackages와 basePackageClasses를 지정하지 않고 설정 정보 클래스의 위치를 프로젝트 최상단에 두는 것이 관례
+// 관례대로 사용하는 것을 권장
+
 @Configuration
 @ComponentScan(
+        basePackages = "hello.core.member",
+        basePackageClasses = AutoAppConfig.class,
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
 public class AutoAppConfig
