@@ -1,5 +1,8 @@
 package hello.core;
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -34,5 +37,26 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig
 {
+    // 같은 이름의 Bean을 컴포넌트에 등록하면?
+    @Bean(name = "memoryMemberRepository")
+    MemberRepository memberRepository()
+    {
+        return new MemoryMemberRepository();
+        // 이렇게 만든 이유는
+        // MemoryMemberRepository의 정의를 보면 @Component가 붙어 있으므로
+        // MemoryMemberRepository의 이름은 첫글자 M이 소문자로 바뀐 memoryMemberRepository이 된다
+        // 그러면 memoryMemberRepository는 2개가 된다
+        // 그래도 2개 모두 등록에 성공하는데
+        // 출력메세지에 Overriding bean definition이 붙어 있음을 알 수 있다
+        // 이 경우 자동 등록되는 Bean보다 수동 등록하는 Bean이 우선권을 가진다
+        // 수동 Bean이 자동 Bean을 override 한다
+        // 하지만 이건 개발자의 의도로 발생하는 경우보다, 여러 설정이 꼬여서 만들어진 경우가 많으므로
+        // 고치기 어려운 버그가 만들어진다
+        // 따라서 최근의 spring boot에서는 수동 Bean과 자동 Bean이 충돌하면 오류가 발생하도록 기본 값을 변경하였다
+        // spring boot인 CoreApplication을 실행하면 충돌이 발생한다        
+        // application.properties에
+        // spring.main.allow-bean-definition-overriding=true 를 추가하면 더이상 오류가 발생하지 않는다
+        // 해당 내용은 출력메세지에서 복붙 가능하다
+    }
     
 }
