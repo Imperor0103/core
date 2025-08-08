@@ -24,11 +24,12 @@ import org.springframework.context.annotation.FilterType;
 // 만약 basePackageClasses를 지정하지 않으면 @ComponentScan을 붙인 클래스가 있는 패키지를 시작위치로 지정
 // basePackages와 basePackageClasses를 지정하지 않고 설정 정보 클래스의 위치를 프로젝트 최상단에 두는 것이 관례
 // 관례대로 사용하는 것을 권장
-
+// spring boot를 사용하면 시작 정보인 @SpringBootApplication을 이 프로젝트의 시작 루트 위치에 두는 것이 관례
+// 이 설정 안에 @ComponentScan이 들어 있다
+// @SpringBootApplication은 프로젝트 만들 때 자동으로 생성되었던 CoreApplication 안에 들어있다
 @Configuration
 @ComponentScan(
-        basePackages = "hello.core.member",
-        basePackageClasses = AutoAppConfig.class,
+
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
 public class AutoAppConfig
