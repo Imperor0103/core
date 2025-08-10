@@ -7,6 +7,8 @@ import hello.core.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+// ctrl + shift + t: 해당 클래스의 테스트 파일 만든다
+
 // 의존관계 자동 주입을 위해 @Component
 @Component
 public class OrderServiceImpl implements OrderService

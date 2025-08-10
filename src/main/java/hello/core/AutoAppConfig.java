@@ -37,6 +37,11 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig
 {
+    // 자동등록되어있는데 수동으로 등록해서 생긴 오류다
+    // 수동으로 등록한 부분을 comment 처리 한다
+    
+    // ctrl + shift + /: 범위 전체 주석(comment) 처리
+/*    
     // 같은 이름의 Bean을 컴포넌트에 등록하면?
     @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository()
@@ -58,5 +63,5 @@ public class AutoAppConfig
         // spring.main.allow-bean-definition-overriding=true 를 추가하면 더이상 오류가 발생하지 않는다
         // 해당 내용은 출력메세지에서 복붙 가능하다
     }
-    
+    */
 }
