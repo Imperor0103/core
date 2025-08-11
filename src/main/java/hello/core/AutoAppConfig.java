@@ -1,7 +1,11 @@
 package hello.core;
 
+import hello.core.discount.DiscountPolicy;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import hello.core.order.OrderService;
+import hello.core.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -64,4 +68,17 @@ public class AutoAppConfig
         // 해당 내용은 출력메세지에서 복붙 가능하다
     }
     */
+
+    // 생성자 주입 연습
+//    @Bean
+//    OrderService  orderService(MemberRepository memberRepository, DiscountPolicy discountPolicy)
+//    {
+//        return new OrderServiceImpl(memberRepository, discountPolicy);
+//    }
+
+    @Bean(name = "memoryMemberRepository")
+    MemberRepository memberRepository()
+    {
+        return new MemoryMemberRepository();
+    }
 }
