@@ -13,6 +13,8 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;    // spring으로 변환
 
+// 전체 테스트: project(Alt + 1) > test 폴더 우클릭 -> Run 'All Tests'
+
 // ctrl + E: 최근 열었던 파일 보여준다
 
 // 애플리케이션에 대한 환경 구성은 여기서 한다
@@ -74,8 +76,8 @@ public class AppConfig
         System.out.println("AppConfig.orderService");
 
         // 마찬가지로 생성자 주입
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
-        return null;
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return null;
     }
 
     @Bean

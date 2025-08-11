@@ -25,7 +25,7 @@ public class AutowiredTest
         // required = false: 설정으로 주입할 빈이 없어도 동작
         // 자동 주입할 bean이 없으면 메서드 호출 자체가 안된다
         // Member는 spring bean이 아니다. 따라서 setNoBean1 메서드는 호출되지 않는다
-        @Autowired(required = false)
+        @Autowired(required = false)    // true하면 null 호출해서 error
         public void setNoBean1(Member noBean1)
         {
             System.out.println("noBean1 = " + noBean1);

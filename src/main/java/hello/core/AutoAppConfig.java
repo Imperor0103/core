@@ -76,9 +76,10 @@ public class AutoAppConfig
 //        return new OrderServiceImpl(memberRepository, discountPolicy);
 //    }
 
-    @Bean(name = "memoryMemberRepository")
-    MemberRepository memberRepository()
-    {
-        return new MemoryMemberRepository();
-    }
+    // 수동 bean override 문제가 발생하여 수동 bean을 comment 처리
+//    @Bean(name = "memoryMemberRepository")
+//    MemberRepository memberRepository()
+//    {
+//        return new MemoryMemberRepository();
+//    }
 }
