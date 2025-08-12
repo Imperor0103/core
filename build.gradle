@@ -13,12 +13,36 @@ java {
 	}
 }
 
+// 아래의 lombok 추가 후 오른쪽의 gradle -> sync all gradle procject 클릭해야 한다
+// 왼쪽의 external libraries에 projectlombok:lombok이 들어가 있는걸 알 수 있다
+// 윈도우즈의 경우 settings(ctrl + alt + s) 들어간 뒤
+// plugins -> lombok 검색 후 설치
+// compiler -> annotation processors -> enable annotation processing 체크
+
+
+//lombok 설정 추가 시작
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+//lombok 설정 추가 끝
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+
+	//lombok 라이브러리 추가 시작
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	//lombok 라이브러리 추가 끝
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

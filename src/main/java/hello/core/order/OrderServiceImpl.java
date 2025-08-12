@@ -4,6 +4,7 @@ import hello.core.discount.DiscountPolicy;
 
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 // 의존관계 자동 주입을 위해 @Component
 @Component
+@RequiredArgsConstructor    // final이 붙은 필드의 생성자를 자동 생성해주는 lombok 기능, ctrl + f12를 통해 확인가능
 public class OrderServiceImpl implements OrderService
 {
     // DIP 원칙 적용
@@ -56,15 +58,15 @@ public class OrderServiceImpl implements OrderService
     // 생성자를 통해 memberRepository와 discountPolicy에 뭐가 들어갈지 선택
     // 의존관계 자동 주입을 위해 @Autowired
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy)
-    {
-        System.out.println("1. OrderServiceImpl.OrderserviceImpl");
-//        System.out.println("memberRepository = " + memberRepository);
-//        System.out.println("discountPolicy = " + discountPolicy);
-
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy)
+//    {
+//        System.out.println("1. OrderServiceImpl.OrderserviceImpl");
+////        System.out.println("memberRepository = " + memberRepository);
+////        System.out.println("discountPolicy = " + discountPolicy);
+//
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     // 일반 메서드 주입 테스트
 //    @Autowired
