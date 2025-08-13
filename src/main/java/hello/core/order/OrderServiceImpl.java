@@ -59,8 +59,9 @@ public class OrderServiceImpl implements OrderService
     // 생성자를 통해 memberRepository와 discountPolicy에 뭐가 들어갈지 선택
     // 의존관계 자동 주입을 위해 @Autowired
 
+    // parameter에서 ctrl + alt + b: 구현 옵션
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy)
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy)
     {
         System.out.println("1. OrderServiceImpl.OrderserviceImpl");
 //        System.out.println("memberRepository = " + memberRepository);
