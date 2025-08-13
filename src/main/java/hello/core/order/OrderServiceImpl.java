@@ -6,6 +6,7 @@ import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 // ctrl + shift + t: 해당 클래스의 테스트 파일 만든다
@@ -59,7 +60,7 @@ public class OrderServiceImpl implements OrderService
     // 의존관계 자동 주입을 위해 @Autowired
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy)
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy)
     {
         System.out.println("1. OrderServiceImpl.OrderserviceImpl");
 //        System.out.println("memberRepository = " + memberRepository);
