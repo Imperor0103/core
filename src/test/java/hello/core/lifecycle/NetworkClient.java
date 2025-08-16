@@ -2,15 +2,17 @@ package hello.core.lifecycle;
 
 // 테스트를 위한 가짜 네트워크
 
-public class NetworkClient
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public class NetworkClient implements InitializingBean, DisposableBean
 {
     private String url;
 
     public NetworkClient()
     {
         System.out.println("생성자 호출, url = " + url);
-        connect();
-        call("초기화 연결 메시지");
+
     }
 
     public void setUrl(String url) {
@@ -31,5 +33,20 @@ public class NetworkClient
     public void disconnect()
     {
         System.out.println("close: " + url);
+    }
+
+    // property의 초기화(의존관계 주입)가 끝나면 호출되는 메서드
+    @Override
+    public void afterPropertiesSet() throws Exception
+    {
+        System.out.println("connect: " + url);
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    @Override
+    public void destroy() throws Exception
+    {
+        disconnect();
     }
 }
