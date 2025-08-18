@@ -35,6 +35,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 
+	// jsr-330 provider를 사용하려면 등록
+	implementation 'jakarta.inject:jakarta.inject-api:2.0.1'	// spring boot 3.2버전 이상
+
 	//lombok 라이브러리 추가 시작
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

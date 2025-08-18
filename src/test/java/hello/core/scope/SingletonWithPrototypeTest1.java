@@ -2,6 +2,7 @@ package hello.core.scope;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.inject.Provider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.ObjectProvider;
@@ -47,13 +48,14 @@ public class SingletonWithPrototypeTest1
     static class ClientBean
     {
         // 필드 주입으로 테스트(생성자 주입으로 테스트 해도 된다)
+        // java standard인 jsr-330 provider 사용
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;  // jakarta.inject에서 제공하는 Provider를 사용
 
 
         public int logic()
         {
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
