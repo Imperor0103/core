@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -38,36 +39,21 @@ public class SingletonWithPrototypeTest1
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(1);    
+        assertThat(count2).isEqualTo(1);
     }
 
     // singleton bean이면 spring이 자동 등록한다
     @Scope("singleton")
     static class ClientBean
     {
-//        private final PrototypeBean prototypeBean;  // 생성시점에 주입되므로 누가 호출하든 같은 것을 쓴다
-        // singletonClientUsePrototype에서 clientBean1, 2가 logic()을 호출해도
-        // 이미 생성 시점에 주입된 그 PrototypeBean을 사용하므로
-        // 같은 prototypeBean을 쓰는 것이다
-
+        // 필드 주입으로 테스트(생성자 주입으로 테스트 해도 된다)
         @Autowired
-        ApplicationContext applicationContext;
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
-
-//        @Autowired
-//        public ClientBean(PrototypeBean prototypeBean)
-//        {
-//            // PrototypeBean을 등록하기위해 spring 컨테이너에 내부적 요청한다
-//            // spring 컨테이너가 PrototypeBean을 만듣어서 던져준다
-//            // 이때 만들어진 PrototypeBean이 this.prototpypeBean에 할당된다
-//            this.prototypeBean = prototypeBean; // 생성시점에 주입
-//        }
 
         public int logic()
         {
-            // logic을 호출할 때마다 spring 컨테이너한테 PrototypeBean을 새로 만들어서 반환한다
-            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class);
-
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
