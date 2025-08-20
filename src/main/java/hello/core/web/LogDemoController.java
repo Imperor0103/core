@@ -29,7 +29,9 @@ public class LogDemoController
     // MyLogger 인스턴스 자체가 아닌, MyLogger를 찾아서 가져올 수 있는 ObjectProvider를 의존성 주입받는다
     // ObjectProvider가 빈의 조회를 필요한 시점(HTTP 요청이 들어온 시점)까지 지연시켰기 때문에 스코프 불일치 문제를 해결한 것
     // 덕분에 싱글톤 빈과 요청 스코프 빈이 안전하게 협력할 수 있게 되었다
-
+    // CoreApplication 실행하면 디버깅 비슷한 상태가 되는데
+    // http://localhost:8080/log-demo 들어가서 F5 등 다른 입력을 주면
+    // terminal에 요청이 출력된다!
 
     @RequestMapping("log-demo")
     @ResponseBody
@@ -43,5 +45,4 @@ public class LogDemoController
         logDemoService.logic("testID");
         return "OK";
     }
-
 }
