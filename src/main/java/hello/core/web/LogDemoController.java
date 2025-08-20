@@ -35,13 +35,18 @@ public class LogDemoController
 
     @RequestMapping("log-demo")
     @ResponseBody
-    public String logDemo(HttpServletRequest request)
+    public String logDemo(HttpServletRequest request) throws InterruptedException
     {
         String requestURL = request.getRequestURL().toString();
         MyLogger myLogger = myLoggerProvider.getObject();   //
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
+
+        // 동시에 요청이 들어오더라도, 그 요청마다 객체를 따로 관리한다
+        // 그것을 확인하기 위한 sleep
+        Thread.sleep(10);
+
         logDemoService.logic("testID");
         return "OK";
     }
