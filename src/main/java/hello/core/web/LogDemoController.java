@@ -22,7 +22,7 @@ public class LogDemoController
     // Spring이 애플리케이션 시작 시점에 싱글톤 빈을 초기화하면서 MyLogger 빈을 주입하려고 할 때,
     // MyLogger 빈은 아직 생성되지 않았기 때문에 주입할 수 없어 오류가 발생했던 것이다.
     // 마치 "아직 존재하지도 않는 택배를 지금 당장 보내라"고 하는 것과 같다
-    private final ObjectProvider<MyLogger>  myLoggerProvider;
+    private final MyLogger  myLogger;
     // 1.ObjectProvider를 사용하여 spring 실행할때 request 스코프 빈을 생성
     // ObjectProvider는 "지금 당장 빈을 주입해달라"는 요청 대신, "빈을 찾아올 수 있는 방법(provider)"을 주입한다
     // 따라서 싱글톤 빈인 LogDemoController와 LogDemoService는 스프링 시작 시점에
@@ -38,7 +38,8 @@ public class LogDemoController
     public String logDemo(HttpServletRequest request) throws InterruptedException
     {
         String requestURL = request.getRequestURL().toString();
-        MyLogger myLogger = myLoggerProvider.getObject();   //
+
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
